@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyse pré-acquisition immobilière — PLU, DVF, rentabilité | Prospimmo</title>
+<meta name="description" content="Prospimmo analyse une adresse en quelques minutes : PLU décodé, ventes DVF du secteur, parcelle et marge nette. L'aide à la décision pré-acquisition pour marchands de biens.">
+<link rel="canonical" href="https://prospimmo.fr/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prospimmo">
+<meta property="og:title" content="Analyse pré-acquisition immobilière — PLU, DVF, rentabilité | Prospimmo">
+<meta property="og:description" content="Prospimmo analyse une adresse en quelques minutes : PLU décodé, ventes DVF du secteur, parcelle et marge nette. L'aide à la décision pré-acquisition pour marchands de biens.">
+<meta property="og:url" content="https://prospimmo.fr/">
+<meta property="og:image" content="https://prospimmo.fr/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Prospimmo",
+  "url": "https://prospimmo.fr",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Outil d'aide à la décision pré-acquisition immobilière : analyse PLU/PLUiH, données DVF, cadastre et simulateur de rentabilité à partir d'une adresse.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="brand">
+      <img src="logo.jpg" alt="Prospimmo" class="brand-logo" width="120" height="32">
+      <span>Prospimmo</span>
+    </div>
+    <nav class="links">
+      <a href="#principe">Le principe</a>
+      <a href="#features">Données</a>
+      <a href="#ia">L'IA</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="#demande" class="btn btn-primary">Demander un accès</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="parcels"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Aide à la décision pré-acquisition</span>
+      <h1 class="title">D'une adresse<br>à une <span class="hl">décision</span>.<br>En minutes.</h1>
+      <p class="lead">Vous entrez une adresse. L'outil rassemble le PLU, les ventes du secteur, la parcelle et la marge possible — puis vous dit si le dossier vaut le coup d'être poussé.</p>
+      <div class="hero-cta">
+        <a href="#demande" class="btn btn-primary">Analyser une adresse →</a>
+        <a href="#principe" class="btn btn-ghost">Voir comment ça marche</a>
+      </div>
+      <div class="reassure">
+        <span><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Aucun tableau de bord à apprendre</span>
+        <span><svg class="check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Un résumé, pas des données brutes</span>
+      </div>
+    </div>
+
+    <!-- DOSSIER — élément signature -->
+    <div class="dossier-shell">
+      <span class="pulse-tag">démo en direct</span>
+      <div class="addressbar">
+        <svg class="pin" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 16s5.5-4.7 5.5-8.5A5.5 5.5 0 003.5 7.5C3.5 11.3 9 16 9 16z" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="7.5" r="2" fill="currentColor"/></svg>
+        <span class="typed" id="typed"></span><span class="caret" id="caret"></span>
+        <button class="go-btn" aria-hidden="true" tabindex="-1">Analyser</button>
+      </div>
+
+      <div class="dossier" aria-live="polite">
+        <div class="dossier-head">
+          <div class="h-l">
+            <span class="ttl">Synthèse du dossier</span>
+            <span class="sub" id="d-sub">parcelle AK 214 · 612 m²</span>
+          </div>
+          <span class="verdict v-watch" id="d-verdict">À creuser</span>
+        </div>
+        <div class="rows" id="d-rows">
+          <div class="row"><span class="k">Zone PLU</span><span class="v"><span class="chip chip-z" id="d-zone">UC2</span> — habitat, commerce</span></div>
+          <div class="row"><span class="k">CES / Hauteur</span><span class="v">CES <b id="d-ces">0,40</b> · <b id="d-haut">13 m (R+3)</b></span></div>
+          <div class="row"><span class="k">DVF secteur</span><span class="v"><b id="d-dvf">8 mutations</b> &lt; 300 m · médiane <b id="d-prix">3 250 €/m²</b></span></div>
+          <div class="row margin-row"><span class="k">Marge nette est.</span><span class="v"><span class="margin-val" id="d-marge">+18 % · +94 k€</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPE -->
+<section class="principe" id="principe">
+  <div class="parcels"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Le principe</span>
+      <h2 class="sec-title">Trois gestes. Pas un de plus.</h2>
+      <p class="sec-sub">Le métier de marchand de biens se joue sur la vitesse de tri. L'outil suit exactement ce rythme.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Entrez une adresse</h3>
+        <p>Une rue, un numéro. C'est tout ce que l'outil demande pour lancer l'analyse complète.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>Lisez le résumé</h3>
+        <p>Zone, règles clés, comparables de vente, parcelle et marge possible — synthétisés sur une page.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <svg class="ico" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4 10-11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Décidez vite</h3>
+        <p>Un verdict clair vous dit si ça vaut le coup. Vous poussez le dossier — ou vous passez au suivant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="parcels"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Ce que l'outil rassemble</span>
+      <h2 class="sec-title">Toutes les données d'une opportunité, au même endroit.</h2>
+      <p class="sec-sub">Fini les allers-retours entre le cadastre, le PLU, les portails de ventes et votre tableur. Une adresse suffit.</p>
+    </div>
+
+    <div class="feat-grid">
+      <!-- PLU (big) -->
+      <div class="feat big reveal">
+        <span class="tag">Analyse automatisée</span>
+        <h3>PLU / PLUiH décodé</h3>
+        <p>L'outil lit le règlement à votre place : zone, coefficient d'emprise au sol, hauteur autorisée, destinations permises et règles qui font basculer un projet. En clair, pas en jargon.</p>
+        <div class="viz">
+          <svg viewBox="0 0 360 96" preserveAspectRatio="xMidYMid slice">
+            <rect width="360" height="96" fill="#F1F2EE"/>
+            <path d="M30 70 L90 20 L150 55 L210 30 L270 60 L330 35" fill="none" stroke="#CFD4CC" stroke-width="1"/>
+            <polygon points="60,75 130,40 130,82 60,82" fill="rgba(31,107,79,.14)" stroke="#1F6B4F" stroke-width="1.3"/>
+            <polygon points="150,82 150,48 230,30 230,82" fill="rgba(232,163,61,.16)" stroke="#E8A33D" stroke-width="1.3"/>
+            <polygon points="250,82 250,52 320,52 320,82" fill="rgba(20,33,28,.06)" stroke="#CFD4CC" stroke-width="1.3"/>
+            <text x="86" y="68" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#16513C">UC2</text>
+            <text x="178" y="68" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#C9842A">UA</text>
+            <text x="272" y="71" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#6A756E">N</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- DVF (small) -->
+      <div class="feat small reveal">
+        <span class="tag">Données DVF</span>
+        <h3>Ventes du secteur</h3>
+        <p>Mutations récentes filtrées par rayon autour du bien.</p>
+        <div class="viz">
+          <svg viewBox="0 0 200 96">
+            <rect width="200" height="96" fill="#F1F2EE"/>
+            <circle cx="100" cy="48" r="40" fill="none" stroke="#CFD4CC" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="48" r="24" fill="none" stroke="#CFD4CC" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="48" r="4" fill="#1F6B4F"/>
+            <circle cx="70" cy="34" r="3.4" fill="#E8A33D"/><circle cx="128" cy="40" r="3.4" fill="#E8A33D"/>
+            <circle cx="118" cy="68" r="3.4" fill="#E8A33D"/><circle cx="78" cy="64" r="3.4" fill="#E8A33D"/>
+            <circle cx="132" cy="60" r="3.4" fill="#E8A33D"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Cadastre (small) -->
+      <div class="feat small reveal">
+        <span class="tag">Cadastre</span>
+        <h3>Parcelle &amp; situation</h3>
+        <p>Références, surface et voisinage parcellaire d'un coup d'œil.</p>
+        <div class="viz">
+          <svg viewBox="0 0 200 96">
+            <rect width="200" height="96" fill="#F1F2EE"/>
+            <path d="M30 20 H80 V50 H30 Z" fill="none" stroke="#CFD4CC" stroke-width="1.2"/>
+            <path d="M80 20 H150 V42 H80 Z" fill="none" stroke="#CFD4CC" stroke-width="1.2"/>
+            <path d="M80 42 H150 V76 H80 Z" fill="rgba(31,107,79,.13)" stroke="#1F6B4F" stroke-width="1.5"/>
+            <path d="M30 50 H80 V76 H30 Z" fill="none" stroke="#CFD4CC" stroke-width="1.2"/>
+            <text x="100" y="62" font-family="JetBrains Mono" font-size="10" font-weight="700" fill="#16513C">AK 214</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Simulateur (big) -->
+      <div class="feat big reveal">
+        <span class="tag">Simulateur</span>
+        <h3>Rentabilité, en quelques curseurs</h3>
+        <p>Prix d'achat, travaux, prix de revente : l'outil calcule la marge nette et vous montre la sensibilité du projet. La décision repose sur un chiffre, pas sur une intuition.</p>
+        <div class="viz">
+          <svg viewBox="0 0 360 96">
+            <rect width="360" height="96" fill="#F1F2EE"/>
+            <line x1="30" y1="78" x2="330" y2="78" stroke="#CFD4CC" stroke-width="1"/>
+            <rect x="50" y="40" width="34" height="38" rx="2" fill="rgba(20,33,28,.12)"/>
+            <rect x="104" y="30" width="34" height="48" rx="2" fill="rgba(20,33,28,.12)"/>
+            <rect x="158" y="48" width="34" height="30" rx="2" fill="rgba(31,107,79,.18)"/>
+            <rect x="212" y="22" width="34" height="56" rx="2" fill="#1F6B4F"/>
+            <text x="222" y="16" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#C9842A">+18%</text>
+            <rect x="278" y="40" width="34" height="38" rx="2" fill="rgba(20,33,28,.12)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Off-market (full width) -->
+      <div class="feat reveal" style="grid-column:span 6;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center">
+        <div>
+          <span class="tag">Off-market</span>
+          <h3>Les biens à rénover, avant les autres</h3>
+          <p>L'outil repère les parcelles et bâtis à fort potentiel de rénovation qui ne sont pas encore sur le marché. Vous arrivez sur l'opportunité pendant qu'elle est encore discrète.</p>
+        </div>
+        <div class="viz" style="height:120px">
+          <svg viewBox="0 0 360 120" preserveAspectRatio="xMidYMid slice">
+            <rect width="360" height="120" fill="#F1F2EE"/>
+            <g opacity="0.5">
+              <rect x="20" y="20" width="70" height="80" fill="none" stroke="#CFD4CC"/>
+              <rect x="90" y="20" width="80" height="80" fill="none" stroke="#CFD4CC"/>
+              <rect x="170" y="20" width="60" height="80" fill="none" stroke="#CFD4CC"/>
+              <rect x="230" y="20" width="110" height="80" fill="none" stroke="#CFD4CC"/>
+            </g>
+            <rect x="92" y="22" width="76" height="76" fill="rgba(232,163,61,.15)" stroke="#E8A33D" stroke-width="1.6"/>
+            <circle cx="130" cy="60" r="20" fill="none" stroke="#E8A33D" stroke-width="1.4" opacity=".55"/>
+            <circle cx="130" cy="60" r="32" fill="none" stroke="#E8A33D" stroke-width="1" opacity=".3"/>
+            <path d="M124 60l4 4 8-9" stroke="#C9842A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="250" y="58" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#C9842A">potentiel élevé</text>
+            <text x="250" y="74" font-family="JetBrains Mono" font-size="10" fill="#6A756E">non listé</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IA -->
+<section class="ia" id="ia">
+  <div class="wrap ia-grid">
+    <div class="reveal">
+      <span class="sec-eyebrow">L'intelligence au service de la lecture</span>
+      <h2 class="sec-title" style="margin-top:14px">L'IA fait le travail de lecture. Vous gardez la décision.</h2>
+      <p class="sec-sub">Le règlement d'urbanisme est dense et change d'une commune à l'autre. L'IA le lit, le résume et répond à vos questions en langage courant — toujours en pointant la règle d'origine.</p>
+      <ul class="ia-points">
+        <li>
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l1.8 4.5L15 8l-4.2 1.5L9 14l-1.8-4.5L3 8l4.2-1.5L9 2z" fill="currentColor"/></svg></span>
+          <div><b>Synthèse rédigée, pas un export</b><span>Au lieu d'un PDF de 80 pages, une page de conclusions exploitables.</span></div>
+        </li>
+        <li>
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 4h12v8H7l-3 3V4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          <div><b>Chatbot PLU pour affiner</b><span>« Puis-je surélever ? », « Quelle emprise au sol reste-t-il ? » — réponse immédiate, sourcée.</span></div>
+        </li>
+        <li>
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 6v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <div><b>Le temps d'analyse divisé</b><span>Ce qui prenait une demi-journée de recherche tient en quelques minutes.</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="chat reveal">
+      <div class="crumb">
+        <span class="dot" style="box-shadow:none"></span> Chatbot PLU · 12 rue des Lilas, Villeurbanne
+      </div>
+      <div class="bubble user">En zone UC2, est-ce que je peux ajouter un étage au bâtiment existant ?</div>
+      <div class="bubble ai">La hauteur autorisée est de <b>13 m (R+3)</b>. Le bâti actuel est en R+2 : une surélévation d'un niveau reste possible sous cette limite.<span class="src">Source : règlement UC2, art. 10 — hauteur des constructions</span></div>
+      <div class="bubble user">Et l'emprise au sol disponible ?</div>
+      <div class="bubble ai">Le CES est de <b>0,40</b>. Sur 612 m², soit <b>245 m²</b> d'emprise au sol max. L'emprise actuelle laisse une marge avant d'atteindre le plafond.<span class="src">Source : règlement UC2, art. 9 — emprise au sol</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLICITÉ -->
+<section class="simpl" id="simplicite">
+  <div class="parcels"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Pensé pour aller vite</span>
+      <h2 class="sec-title">Vous voulez des réponses. Pas un logiciel à dompter.</h2>
+      <p class="sec-sub">Toute la complexité reste sous le capot. Ce que vous voyez, c'est l'essentiel pour trancher.</p>
+    </div>
+    <div class="compare">
+      <div class="col no reveal">
+        <h3>Ce que vous ne verrez pas</h3>
+        <ul>
+          <li><svg class="x" width="18" height="18" viewBox="0 0 18 18"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Des dashboards à configurer</li>
+          <li><svg class="x" width="18" height="18" viewBox="0 0 18 18"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Du jargon d'urbanisme à déchiffrer</li>
+          <li><svg class="x" width="18" height="18" viewBox="0 0 18 18"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Des exports bruts à retravailler</li>
+          <li><svg class="x" width="18" height="18" viewBox="0 0 18 18"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Une formation pour démarrer</li>
+        </ul>
+      </div>
+      <div class="col yes reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="rgba(232,163,61,.18)"/><path d="M6 10.5l2.5 2.5L14 7" stroke="#E8A33D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ce que vous obtenez</h3>
+        <ul>
+          <li><svg class="v" width="18" height="18" viewBox="0 0 18 18"><path d="M4 9.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Une synthèse claire, en une page</li>
+          <li><svg class="v" width="18" height="18" viewBox="0 0 18 18"><path d="M4 9.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Les règles d'urbanisme en français simple</li>
+          <li><svg class="v" width="18" height="18" viewBox="0 0 18 18"><path d="M4 9.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Une marge chiffrée et un verdict</li>
+          <li><svg class="v" width="18" height="18" viewBox="0 0 18 18"><path d="M4 9.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Une réponse à chaque question, à la demande</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="demande">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div class="parcels"></div>
+      <h2>Testez votre première adresse.</h2>
+      <p>Entrez votre e-mail pour rejoindre les premiers accès. Vous analysez une vraie opportunité dès l'ouverture.</p>
+      <div class="cta-form">
+        <input type="email" placeholder="vous@exemple.fr" aria-label="Votre adresse e-mail">
+        <button class="btn-amber" type="button">Demander un accès</button>
+      </div>
+      <small>Sans engagement · vous gardez la main sur vos dossiers.</small>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="brand" style="font-size:15px">
+      <svg class="mark" viewBox="0 0 30 30" fill="none" style="width:26px;height:26px">
+        <rect x="1" y="1" width="28" height="28" rx="7" fill="#1F6B4F"/>
+        <path d="M9 20.5V11l6-3.5 6 3.5v9.5" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="15" cy="14.5" r="2.4" fill="#E8A33D"/>
+      </svg>
+      <span style="color:var(--ink)">Prospimmo</span>
+    </div>
+    <nav class="foot-links">
+      <a href="#features">Données</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
+      <a href="cgv.html">CGV</a>
+    </nav>
+    <span>© 2026 · Nom &amp; domaine à définir</span>
+  </div>
+</footer>
+
+<script>
+// --- Démo en direct : adresse tapée -> dossier rempli, en boucle ---
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var cases = [
+    { addr:"12 rue des Lilas, 69100 Villeurbanne",
+      sub:"parcelle AK 214 · 612 m²", verdict:["À creuser","v-watch"],
+      zone:"UC2", dest:"— habitat, commerce", ces:"0,40", haut:"13 m (R+3)",
+      dvf:"8 mutations", prix:"3 250 €/m²", marge:"+18 % · +94 k€" },
+    { addr:"5 impasse du Verger, 33700 Mérignac",
+      sub:"parcelle BC 88 · 480 m²", verdict:["Go","v-go"],
+      zone:"UM", dest:"— habitat", ces:"0,50", haut:"10 m (R+2)",
+      dvf:"5 mutations", prix:"4 010 €/m²", marge:"+24 % · +142 k€" },
+    { addr:"27 avenue Carnot, 35000 Rennes",
+      sub:"parcelle CK 309 · 530 m²", verdict:["Vigilance","v-watch"],
+      zone:"UB", dest:"— habitat, services", ces:"0,45", haut:"16 m (R+4)",
+      dvf:"11 mutations", prix:"3 780 €/m²", marge:"+9 % · +47 k€" }
+  ];
+
+  var typed   = document.getElementById('typed');
+  var caret   = document.getElementById('caret');
+  var rows    = Array.prototype.slice.call(document.querySelectorAll('#d-rows .row'));
+  var elSub   = document.getElementById('d-sub');
+  var elVerd  = document.getElementById('d-verdict');
+  var map = { zone:'d-zone', ces:'d-ces', haut:'d-haut', dvf:'d-dvf', prix:'d-prix', marge:'d-marge' };
+
+  function setCase(c, animate){
+    elSub.textContent = c.sub;
+    elVerd.textContent = c.verdict[0];
+    elVerd.className = 'verdict ' + c.verdict[1];
+    document.getElementById('d-zone').textContent = c.zone;
+    document.getElementById('d-zone').nextSibling.textContent = ' ' + c.dest;
+    document.getElementById('d-ces').textContent = c.ces;
+    document.getElementById('d-haut').textContent = c.haut;
+    document.getElementById('d-dvf').textContent = c.dvf;
+    document.getElementById('d-prix').textContent = c.prix;
+    document.getElementById('d-marge').textContent = c.marge;
+    if(!animate){ rows.forEach(function(r){r.classList.add('in');}); return; }
+    rows.forEach(function(r){ r.classList.remove('in'); });
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, 180 + i*150); });
+  }
+
+  if(reduce){
+    typed.textContent = cases[0].addr;
+    caret.style.display='none';
+    setCase(cases[0], false);
+    return;
+  }
+
+  var idx = 0;
+  function runCase(){
+    var c = cases[idx];
+    typed.textContent = '';
+    rows.forEach(function(r){ r.classList.remove('in'); });
+    var i = 0;
+    (function type(){
+      if(i <= c.addr.length){
+        typed.textContent = c.addr.slice(0,i);
+        i++;
+        setTimeout(type, 34);
+      } else {
+        setTimeout(function(){ setCase(c, true); }, 260);
+        setTimeout(function(){ idx=(idx+1)%cases.length; runCase(); }, 4600);
+      }
+    })();
+  }
+  runCase();
+})();
+
+// --- Reveal au scroll ---
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('seen'); io.unobserve(e.target); } });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
