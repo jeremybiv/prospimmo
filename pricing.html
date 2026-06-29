@@ -62,7 +62,7 @@
   <div class="wrap">
     <div class="bill-toggle" role="group" aria-label="Période de facturation">
       <button id="b-month" class="on" type="button">Mensuel</button>
-      <button id="b-year" type="button">Annuel <span class="save">−20%</span></button>
+      <button id="b-year" type="button">Annuel <span class="save">−10%</span></button>
     </div>
 
     <div class="tiers">
@@ -90,7 +90,7 @@
         <div class="name">Pro MDB</div>
         <div class="pitch">Pour le marchand de biens indépendant qui source en continu.</div>
         <div class="price">
-          <span class="amt" data-m="89" data-y="71">22.9&nbsp;€</span>
+          <span class="amt" data-m="22.9" data-y="20.61">22.9&nbsp;€</span>
           <span class="per">/ mois</span>
         </div>
         <div class="note" id="note-pro"></div>
@@ -100,7 +100,6 @@
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Synthèse PLU / PLUiH complète</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Données DVF + cadastre</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Chatbot PLU illimité</li>
-          <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Détection off-market</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Export des dossiers (PDF)</li>
         </ul>
       </div>
@@ -110,7 +109,7 @@
         <div class="name">Cabinet</div>
         <div class="pitch">Pour les équipes qui partagent leurs dossiers.</div>
         <div class="price">
-          <span class="amt" data-m="249" data-y="199">Sur demande</span>
+          <span>Sur demande</span>
         </div>
         <div class="note" id="note-cab"></div>
         <a href="contact.html" class="btn btn-ghost">Parler à l'équipe</a>
@@ -118,7 +117,7 @@
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Tout l'offre Pro</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Jusqu'à 10 utilisateurs</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Espace équipe partagé</li>
-          <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Détection off-market prioritaire</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Détection off-market</li>
           <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Support prioritaire</li>
         </ul>
       </div>
@@ -172,9 +171,9 @@
       el.textContent = (v==='0' ? '0' : v) + '\u00A0€';
     });
     if(period==='y'){
-      notePro.textContent = 'soit 852 € / an'; noteCab.textContent = 'soit 2 388 € / an';
+      notePro.textContent = 'soit 247 € / an'; noteCab.textContent = '';
     } else {
-      notePro.textContent = 'facturé mensuellement'; noteCab.textContent = 'facturé mensuellement';
+      notePro.textContent = 'facturé mensuellement'; noteCab.textContent = '';
     }
   }
   bM.addEventListener('click',function(){bM.classList.add('on');bY.classList.remove('on');render('m');});
