@@ -79,10 +79,10 @@
   .check{color:var(--emerald)}
 
   /* ---------- DOSSIER (signature) ---------- */
-  .dossier-shell{position:relative}
+  .dossier-shell{position:relative;min-width:0}
   .addressbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 8px 8px 16px;box-shadow:0 10px 30px -18px rgba(20,33,28,.4)}
   .addressbar .pin{color:var(--emerald);flex:none}
-  .addressbar .typed{font-family:'JetBrains Mono';font-size:14px;color:var(--ink);flex:1;min-height:20px;white-space:nowrap;overflow:hidden}
+  .addressbar .typed{font-family:'JetBrains Mono';font-size:14px;color:var(--ink);flex:1;min-width:0;min-height:20px;white-space:nowrap;overflow:hidden}
   .caret{display:inline-block;width:2px;height:16px;background:var(--emerald);vertical-align:-3px;animation:blink 1s steps(1) infinite;margin-left:1px}
   @keyframes blink{50%{opacity:0}}
   .go-btn{background:var(--emerald);color:#fff;border:none;border-radius:9px;padding:9px 14px;font-weight:600;font-size:13.5px;font-family:'Inter';cursor:pointer;white-space:nowrap}
