@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Prospimmo Contact <onboarding@resend.dev>',
+      from: 'Prospimmo Contact <contact@prospimmo.fr>',
       to: ['jeremy@prospimmo.fr'],
       reply_to: email,
       subject: `[Prospimmo] ${subject || 'Nouveau message'} — ${name}`,
