@@ -86,7 +86,7 @@
       <div class="cinfo">
         <div class="item">
           <span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 5l6 4 6-4" stroke="currentColor" stroke-width="1.5"/></svg></span>
-          <div><b>E-mail</b><span><a href="mailto:contact@exemple.fr">contact@exemple.fr</a> <em style="color:var(--muted);font-style:normal">· adresse à définir</em></span></div>
+          <div><b>E-mail</b><span><a href="mailto:jeremy@prospimmo.fr">jeremy@prospimmo.fr</a></span></div>
         </div>
         <div class="item">
           <span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 5.5v3.5l2.3 1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
@@ -147,7 +147,7 @@
     btn.disabled = true;
     btn.textContent = 'Envoi en cours…';
 
-    fetch('send.php', {
+    fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, company: company, email: email, subject: subject, message: message })
