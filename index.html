@@ -329,6 +329,31 @@
   </div>
 </section>
 
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="wrap newsletter-in reveal">
+    <div class="nl-text">
+      <span class="eyebrow"><span class="dot"></span> Pour les marchands de biens</span>
+      <h2>Les bonnes pratiques, directement dans votre boîte.</h2>
+      <p>Chaque semaine : un tip concret sur la lecture du PLU, l'analyse des DVF, la négociation ou la structuration d'une opération. Pas de blabla — ce que font les MdB qui closent le plus.</p>
+      <ul class="nl-perks">
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Décrypter un PLU complexe en 10 minutes</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Repérer les DVF sous-cotés dans un secteur</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Calculer une marge réaliste avant d'offrir</li>
+      </ul>
+    </div>
+    <div class="nl-form-wrap">
+      <p class="nl-tagline">Rejoignez les marchands qui apprennent vite.</p>
+      <form class="nl-form" id="nl-form" novalidate>
+        <input type="email" id="nl-email" placeholder="vous@exemple.fr" aria-label="Votre adresse e-mail" autocomplete="email">
+        <button type="submit" class="btn btn-primary">S'inscrire gratuitement</button>
+      </form>
+      <p id="nl-msg" style="display:none;margin-top:12px;font-size:14px;padding:10px 14px;border-radius:8px"></p>
+      <small>Désinscription en un clic · aucun spam.</small>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap foot-in">
@@ -426,6 +451,54 @@
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('seen'); io.unobserve(e.target); } });
   }, { threshold:.14 });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+(function(){
+  var form = document.getElementById('nl-form');
+  var msg  = document.getElementById('nl-msg');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = (document.getElementById('nl-email').value || '').trim();
+    msg.style.display = 'none';
+    if (!email) return;
+    var btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Inscription…';
+    fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data.ok) {
+        msg.textContent = 'Bienvenue ! Vous recevrez le prochain tip directement.';
+        msg.style.background = 'rgba(31,107,79,.10)';
+        msg.style.color = 'var(--emerald-deep)';
+        msg.style.border = '1px solid rgba(31,107,79,.25)';
+        msg.style.display = 'block';
+        document.getElementById('nl-email').value = '';
+        btn.textContent = 'Inscrit ✓';
+      } else {
+        msg.textContent = data.error || 'Une erreur est survenue.';
+        msg.style.background = 'rgba(220,50,50,.08)';
+        msg.style.color = '#c0392b';
+        msg.style.border = '1px solid rgba(220,50,50,.2)';
+        msg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'S\'inscrire gratuitement';
+      }
+    })
+    .catch(function(){
+      msg.textContent = 'Impossible de joindre le serveur. Réessayez.';
+      msg.style.background = 'rgba(220,50,50,.08)';
+      msg.style.color = '#c0392b';
+      msg.style.border = '1px solid rgba(220,50,50,.2)';
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'S\'inscrire gratuitement';
+    });
+  });
 })();
 </script>
 </body>
