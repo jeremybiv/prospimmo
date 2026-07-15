@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Prospimmo</title>
+<meta name="description" content="Conseils pratiques pour les marchands de biens : lire un PLU, calculer une marge, structurer une opération. Pas de blabla.">
+<link rel="canonical" href="https://prospimmo.fr/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prospimmo">
+<meta property="og:title" content="Blog Prospimmo — Conseils pour marchands de biens">
+<meta property="og:description" content="Conseils pratiques pour les marchands de biens : lire un PLU, calculer une marge, structurer une opération.">
+<meta property="og:image" content="https://prospimmo.fr/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Prospimmo" class="brand-logo">
+    </a>
+    <nav class="links">
+      <a href="index.html#principe">Le principe</a>
+      <a href="index.html#features">Données</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="https://app.prospimmo.fr" class="btn btn-primary">Tester une adresse</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="parcels"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <span class="eyebrow"><span class="dot"></span> Blog</span>
+    <h1>Ce que les marchands qui closent ont compris.</h1>
+    <p class="lead">Pas de tendances immobilières, pas de décryptage macro. Des articles sur ce qui fait tenir — ou capoter — une opération de marchand de biens.</p>
+  </div>
+</section>
+
+<section class="blog-listing">
+  <div class="wrap">
+    <div class="blog-grid">
+
+      <a href="blog/plu-ce-que-personne-ne-vous-dit.html" class="blog-card reveal">
+        <div class="blog-card-tag">PLU &amp; Urbanisme</div>
+        <h2>PLU : ce que personne ne vous dit avant d'acheter</h2>
+        <p>Emprise au sol, hauteur hors tout, OAP sectorielles, recul par rapport aux limites séparatives, emplacements réservés… Les règles qui passent sous le radar et qui font capoter les projets.</p>
+        <div class="blog-card-meta">
+          <span>Juillet 2026</span>
+          <span>7 min de lecture</span>
+        </div>
+      </a>
+
+      <a href="blog/calculer-marge-marchand-de-biens.html" class="blog-card reveal">
+        <div class="blog-card-tag">Rentabilité</div>
+        <h2>Comment calculer une vraie marge en marchand de biens</h2>
+        <p>La marge brute sur le papier et la marge nette en poche, ce n'est pas la même chose. Droits de mutation, frais financiers, TVA sur la marge, aléas travaux — ce que le bilan doit vraiment contenir.</p>
+        <div class="blog-card-meta">
+          <span>Juillet 2026</span>
+          <span>8 min de lecture</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="brand" href="index.html" style="font-size:15px">
+      <svg class="mark" viewBox="0 0 30 30" fill="none" style="width:26px;height:26px"><rect x="1" y="1" width="28" height="28" rx="7" fill="#1F6B4F"/><path d="M9 20.5V11l6-3.5 6 3.5v9.5" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15" cy="14.5" r="2.4" fill="#E8A33D"/></svg>
+      <span style="color:var(--ink)">Prospimmo</span>
+    </a>
+    <nav class="foot-links">
+      <a href="index.html#features">Données</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="cgv.html">CGV</a>
+    </nav>
+    <span>© 2026 Prospimmo</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('seen');io.unobserve(x.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
