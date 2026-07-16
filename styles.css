@@ -80,6 +80,7 @@
     .nav-cta-short{display:inline}
   }
   @media(min-width:841px){.nav-cta-short{display:none}}
+  .trial-note{font-family:'JetBrains Mono';font-size:11.5px;color:var(--emerald-deep);font-weight:600;margin:8px 0 0;letter-spacing:.01em}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding:72px 0 40px}
