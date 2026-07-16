@@ -75,7 +75,11 @@
     nav.links.open{display:flex}
     nav.links a{display:block;padding:13px 24px;font-size:15px;font-weight:500;border-bottom:1px solid var(--line-soft)}
     nav.links a:last-child{border-bottom:none}
+    .nav-in .btn-primary{padding:8px 12px;font-size:13px;white-space:nowrap}
+    .nav-cta-long{display:none}
+    .nav-cta-short{display:inline}
   }
+  .nav-cta-short{display:none}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding:72px 0 40px}
