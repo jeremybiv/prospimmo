@@ -35,6 +35,7 @@
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-in">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="brand">
       <img src="logo.png" alt="Prospimmo" class="brand-logo" width="120" height="32">
       <span>Prospimmo</span>
@@ -47,7 +48,7 @@
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="https://app.prospimmo.fr" class="btn btn-primary">Demander un accès</a>
+    <a href="https://app.prospimmo.fr" class="btn btn-primary"><span class="nav-cta-long">Demander un accès</span><span class="nav-cta-short">Accès</span></a>
   </div>
 </header>
 
@@ -500,6 +501,23 @@
       btn.disabled = false;
       btn.textContent = 'S\'inscrire gratuitement';
     });
+  });
+})();
+</script>
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle');
+  var m=document.querySelector('nav.links');
+  if(!t||!m)return;
+  t.addEventListener('click',function(){
+    var o=m.classList.toggle('open');
+    t.setAttribute('aria-expanded',String(o));
+  });
+  document.addEventListener('click',function(e){
+    if(m.classList.contains('open')&&!t.contains(e.target)&&!m.contains(e.target)){
+      m.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    }
   });
 })();
 </script>

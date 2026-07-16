@@ -20,6 +20,7 @@
 
 <header class="nav">
   <div class="wrap nav-in">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <a class="brand" href="../index.html">
       <img src="../logo.png" alt="Prospimmo" class="brand-logo">
     </a>
@@ -30,7 +31,7 @@
       <a href="../blog.html">Blog</a>
       <a href="../contact.html">Contact</a>
     </nav>
-    <a href="https://app.prospimmo.fr" class="btn btn-primary">Tester une adresse</a>
+    <a href="https://app.prospimmo.fr" class="btn btn-primary"><span class="nav-cta-long">Tester une adresse</span><span class="nav-cta-short">Tester</span></a>
   </div>
 </header>
 
@@ -113,5 +114,22 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle');
+  var m=document.querySelector('nav.links');
+  if(!t||!m)return;
+  t.addEventListener('click',function(){
+    var o=m.classList.toggle('open');
+    t.setAttribute('aria-expanded',String(o));
+  });
+  document.addEventListener('click',function(e){
+    if(m.classList.contains('open')&&!t.contains(e.target)&&!m.contains(e.target)){
+      m.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+</script>
 </body>
 </html>
