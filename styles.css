@@ -300,6 +300,8 @@
 .cinfo span{font-size:14px;color:var(--muted)}
 .cinfo a{color:var(--emerald);font-weight:500}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+.demo-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.demo-fields{grid-template-columns:1fr}}
 
 /* ---------- LEGAL / CGV ---------- */
 .legal{padding:24px 0 90px}
