@@ -73,7 +73,7 @@
       <a href="../demo.html">Démo</a>
       <a href="../contact.html">Contact</a>
     </nav>
-    <a href="https://app.prospimmo.fr" class="btn btn-primary"><span class="nav-cta-long">Tester une adresse</span><span class="nav-cta-short">Tester</span></a>
+    <a href="https://app.prospimmo.fr/?signup=true" class="btn btn-primary"><span class="nav-cta-long">Tester une adresse</span><span class="nav-cta-short">Tester</span></a>
   </div>
 </header>
 
@@ -95,23 +95,23 @@
       <h2>La scène classique</h2>
       <p>Un immeuble de rapport sur LeBonCoin. Prix affiché : 310&nbsp;000&nbsp;€. Surface totale : 320&nbsp;m². Quatre appartements. DPE F. "Travaux importants à prévoir." L'agent vous rappelle demain matin. Avant de décrocher, vous voulez savoir si ça tient.</p>
       <p>Le problème, c'est que "ça tient" ne se lit pas sur l'annonce. Ça se calcule : prix d'achat négocié, frais de notaire réduits avec engagement de revente 5&nbsp;ans, coût des travaux selon l'intensité, frais financiers sur 18&nbsp;mois, TVA sur la marge (art.&nbsp;268 CGI), IS à 15&nbsp;% puis 25&nbsp;%, frais de commercialisation, divers. Ensuite trois scénarios de sensibilité. Ensuite la checklist due diligence pour ne pas oublier l'état daté, le PLU ou les procédures en cours.</p>
-      <p>À la main, dans un tableau, c'est vingt minutes par annonce. Avec le skill Claude mdb-analyser, c'est deux minutes — et la rigueur est la même.</p>
+      <p>À la main, dans un tableau, c'est vingt minutes par annonce. Avec le skill Claude mdb-analyser, c'est deux minutes, et la rigueur est la même.</p>
 
       <h2>Ce que le skill fait concrètement</h2>
       <p>Un skill Claude, c'est un fichier d'instructions qui transforme Claude en expert sectoriel sur un sujet précis. Le skill mdb-analyser suit huit étapes systématiques :</p>
       <ul>
-        <li><strong>Extraction automatique</strong> — il lit l'annonce que vous collez et en tire l'adresse, la surface, le prix, le nombre de lots, le DPE, les travaux mentionnés.</li>
-        <li><strong>Questions ciblées</strong> — il vous demande uniquement ce qui manque : type d'opération (rénovation, division, surélévation, démol-reconstruction…), intensité des travaux, durée, financement, régime TVA.</li>
-        <li><strong>Hypothèses par défaut documentées</strong> — décote d'achat à −10&nbsp;%, frais de notaire MDB à 1,5&nbsp;%, DO à 1,2&nbsp;% des travaux, taux d'emprunt à 3,8&nbsp;%, durée à 18&nbsp;mois. Tout est modifiable.</li>
-        <li><strong>Calcul du coût de revient</strong> — acquisition, travaux TTC avec TVA réduite à 10&nbsp;%, frais financiers, commercialisation, divers.</li>
-        <li><strong>TVA sur marge</strong> — calcul correct selon l'art.&nbsp;268 CGI : marge brute TTC × 20/120, déduction de la TVA sur travaux, crédit de TVA signalé si applicable.</li>
-        <li><strong>IS calculé en deux tranches</strong> — 15&nbsp;% jusqu'à 42&nbsp;500&nbsp;€, 25&nbsp;% au-delà.</li>
-        <li><strong>Tableau de KPIs</strong> — marge brute et nette en euros et en %, ROI brut, ROI annualisé, seuil de rentabilité (prix de revente minimum).</li>
-        <li><strong>Analyse critique</strong> — points forts, points de vigilance, trois scénarios de sensibilité (pessimiste / central / optimiste), checklist due diligence en dix points.</li>
+        <li><strong>Extraction automatique</strong>, il lit l'annonce que vous collez et en tire l'adresse, la surface, le prix, le nombre de lots, le DPE, les travaux mentionnés.</li>
+        <li><strong>Questions ciblées</strong>, il vous demande uniquement ce qui manque : type d'opération (rénovation, division, surélévation, démol-reconstruction…), intensité des travaux, durée, financement, régime TVA.</li>
+        <li><strong>Hypothèses par défaut documentées</strong>, décote d'achat à −10&nbsp;%, frais de notaire MDB à 1,5&nbsp;%, DO à 1,2&nbsp;% des travaux, taux d'emprunt à 3,8&nbsp;%, durée à 18&nbsp;mois. Tout est modifiable.</li>
+        <li><strong>Calcul du coût de revient</strong>, acquisition, travaux TTC avec TVA réduite à 10&nbsp;%, frais financiers, commercialisation, divers.</li>
+        <li><strong>TVA sur marge</strong>, calcul correct selon l'art.&nbsp;268 CGI : marge brute TTC × 20/120, déduction de la TVA sur travaux, crédit de TVA signalé si applicable.</li>
+        <li><strong>IS calculé en deux tranches</strong>, 15&nbsp;% jusqu'à 42&nbsp;500&nbsp;€, 25&nbsp;% au-delà.</li>
+        <li><strong>Tableau de KPIs</strong>, marge brute et nette en euros et en %, ROI brut, ROI annualisé, seuil de rentabilité (prix de revente minimum).</li>
+        <li><strong>Analyse critique</strong>, points forts, points de vigilance, trois scénarios de sensibilité (pessimiste / central / optimiste), checklist due diligence en dix points.</li>
       </ul>
 
       <blockquote>
-        <p>Le verdict GO / WATCH / NO GO n'est pas une opinion — c'est le résultat du calcul. Ce qui change avec le skill, c'est que le calcul prend deux minutes au lieu de vingt.</p>
+        <p>Le verdict GO / WATCH / NO GO n'est pas une opinion: c'est le résultat du calcul. Ce qui change avec le skill, c'est que le calcul prend deux minutes au lieu de vingt.</p>
       </blockquote>
 
       <h2>Ce que la réponse contient</h2>
@@ -124,8 +124,8 @@
 Marge nette estimée : 38 400 €  |  ROI net : 11,2 %  |  ROI annualisé : 7,4 %
 Seuil de rentabilité : 367 000 € (PV minimum à atteindre)
 
-• Décote insuffisante au prix affiché — offre à 275 000 € pour tenir la marge cible à 15 %.
-• Risque travaux élevé (DPE F, immeuble 1960) — prévoir budget lourd et DO obligatoire.
+• Décote insuffisante au prix affiché, offre à 275 000 € pour tenir la marge cible à 15 %.
+• Risque travaux élevé (DPE F, immeuble 1960), prévoir budget lourd et DO obligatoire.
 • Action immédiate : demander les PV d'AG des 3 dernières années avant toute offre.
 ─────────────────────────────────────────────────────────</pre>
 
@@ -149,7 +149,7 @@ description: &gt;
   ou d&#x27;un appartement à analyser en mode marchand de biens, même s&#x27;il ne cite pas &quot;MDB&quot; explicitement.
 ---
 
-# MDB Analyser — Expert Marchand de Biens
+# MDB Analyser, Expert Marchand de Biens
 
 Tu es un expert marchand de biens chevronné. Tu analyses des annonces immobilières avec rigueur et pragmatisme :
 chiffres réels, hypothèses documentées, regard critique sur la viabilité de chaque opération.
@@ -157,13 +157,13 @@ Toujours terminer par un verdict GO / WATCH / NO GO motivé.
 
 ---
 
-## ÉTAPE 1 — Extraction et collecte
+## ÉTAPE 1, Extraction et collecte
 
 Si l&#x27;utilisateur colle un texte d&#x27;annonce ou donne un lien, extraire automatiquement :
 - Adresse / commune / département / code postal
 - Type de bien (maison, appartement, immeuble, local commercial, terrain)
 - Surface habitable déclarée (m²)
-- Prix de vente affiché (FAI ou net vendeur — préciser)
+- Prix de vente affiché (FAI ou net vendeur, préciser)
 - Nombre de lots / appartements (si immeuble)
 - Description des travaux mentionnés dans l&#x27;annonce
 - Classe DPE affichée (si disponible)
@@ -189,10 +189,10 @@ Puis poser **en une seule salve** les questions manquantes :
    G) Acquisition + cession bail commercial
 
 4. 🔨 Intensité des travaux :
-   🟢 Léger       — rafraîchissement (peinture, sols)          : 250–450 €/m²
-   🟡 Moyen       — rénovation partielle (SdB, cuisine)         : 500–850 €/m²
-   🔴 Lourd       — rénovation complète (élec, plomb, isolation) : 900–1 400 €/m²
-   ⚫ Très lourd  — structure, charpente, surélévation           : 1 500–2 500 €/m²
+   🟢 Léger      , rafraîchissement (peinture, sols)          : 250–450 €/m²
+   🟡 Moyen      , rénovation partielle (SdB, cuisine)         : 500–850 €/m²
+   🔴 Lourd      , rénovation complète (élec, plomb, isolation) : 900–1 400 €/m²
+   ⚫ Très lourd , structure, charpente, surélévation           : 1 500–2 500 €/m²
    🏗️ Démolition-reconstruction                                 : 1 800–2 800 €/m²
 
 5. ⏱️ Durée totale de l&#x27;opération (mois) ?
@@ -202,7 +202,7 @@ Puis poser **en une seule salve** les questions manquantes :
    → Apport (€) + taux emprunt (% / an) → par défaut : 30 % apport, 3,8 %/an
 
 7. 📋 Régime TVA applicable ?
-   → Par défaut : TVA sur marge (art. 268 CGI) — achat à un particulier non-assujetti
+   → Par défaut : TVA sur marge (art. 268 CGI), achat à un particulier non-assujetti
 
 8. ✅ Engagement de revente ≤ 5 ans (art. 1115 CGI) ?
    → Par défaut : OUI → frais de notaire réduits MDB (~1,5 %)
@@ -212,12 +212,12 @@ Si des informations sont déjà connues dans la conversation, ne reposer que ce 
 
 ---
 
-## ÉTAPE 2 — Hypothèses par défaut
+## ÉTAPE 2, Hypothèses par défaut
 
 | Paramètre | Valeur par défaut | Source / base |
 |---|---|---|
 | Décote prix d&#x27;achat | –10 % du prix affiché | Pratique MDB courante |
-| Frais de notaire MDB (engagement 5 ans) | 1,5 % | Art. 1115 CGI — émoluments seuls |
+| Frais de notaire MDB (engagement 5 ans) | 1,5 % | Art. 1115 CGI, émoluments seuls |
 | Frais de notaire sans engagement | 8,0 % | Régime normal DMTO 5,8 % + émoluments |
 | Frais d&#x27;agence achat | 0 % | Achat de gré à gré par défaut |
 | Frais de commercialisation revente | 3,5 % du PV | Agence vente standard |
@@ -238,7 +238,7 @@ Si des informations sont déjà connues dans la conversation, ne reposer que ce 
 
 ---
 
-## ÉTAPE 3 — Calcul de rentabilité
+## ÉTAPE 3, Calcul de rentabilité
 
 ### 3.1 Coût d&#x27;acquisition
 
@@ -307,7 +307,7 @@ Coût d&#x27;acquisition
 
 ---
 
-## ÉTAPE 4 — TVA sur marge (art. 268 CGI)
+## ÉTAPE 4, TVA sur marge (art. 268 CGI)
 
 **Applicable quand :** le MDB a acheté le bien à un non-assujetti à la TVA (particulier, association, collectivité) **ET** revend le bien à la TVA.
 
@@ -317,7 +317,7 @@ Marge brute TTC     = Prix de revente TTC – Prix d&#x27;achat TTC
 TVA collectée       = Marge brute TTC × 20 / 120
                     = Marge brute TTC / 6
 
-TVA déductible      = Travaux HT × 10 %  (rénovation — TVA réduite)
+TVA déductible      = Travaux HT × 10 %  (rénovation, TVA réduite)
                    ou Travaux HT × 20 %  (construction neuf)
                   + TVA sur honoraires HT × 20 %
 
@@ -330,7 +330,7 @@ TVA nette due       = TVA collectée – TVA déductible
 
 ---
 
-## ÉTAPE 5 — Marge et IS
+## ÉTAPE 5, Marge et IS
 
 ```
 Marge brute opération = Prix de revente – Coût de revient total
@@ -347,7 +347,7 @@ Marge nette           = Marge après TVA – IS
 
 ---
 
-## ÉTAPE 6 — KPIs de synthèse
+## ÉTAPE 6, KPIs de synthèse
 
 Présenter sous ce format de tableau :
 
@@ -379,7 +379,7 @@ ROI annualisé = (1 + ROI brut) ^ (12 / durée_mois) – 1
 
 ---
 
-## ÉTAPE 7 — Analyse critique
+## ÉTAPE 7, Analyse critique
 
 ### ✅ Points forts (2–3 éléments)
 - Localisation, décote obtenue, potentiel de division, DPE améliorable, zone tendue, etc.
@@ -401,7 +401,7 @@ ROI annualisé = (1 + ROI brut) ^ (12 / durée_mois) – 1
 
 ---
 
-## ÉTAPE 8 — Estimations et recherches complémentaires
+## ÉTAPE 8, Estimations et recherches complémentaires
 
 Proposer systématiquement ce pack de recherches :
 
@@ -410,7 +410,7 @@ Proposer systématiquement ce pack de recherches :
 - **DVF (Demandes de Valeurs Foncières)** : prix de ventes réelles sur les 5 dernières années dans un rayon de 500 m
   → `https://app.dvf.etalab.gouv.fr/` ou `https://explore.data.gouv.fr/`
 - **Estimation valeur marchande m²** : comparer avec MeilleursAgents, SeLoger Estimation, Meilleurs Agents Pro
-- **Estimation loyer mensuel** : utile si location pendant les travaux ou bascule en locatif — calculer le rendement locatif brut
+- **Estimation loyer mensuel** : utile si location pendant les travaux ou bascule en locatif, calculer le rendement locatif brut
   → `Rendement locatif brut = Loyer annuel / CRT × 100`
 
 ### 📐 Urbanisme et potentiel
@@ -509,7 +509,7 @@ Motivation (2-3 phrases) :
 </pre>
 
       <h2>L'installer en cinq minutes dans Claude.ai</h2>
-      <p>Claude.ai permet de créer des <strong>Projets</strong> — des espaces de conversation avec des instructions permanentes. Une fois le skill installé dans un projet, chaque conversation de ce projet démarre avec les capacités du skill activées. Vous n'avez plus rien à recopier ni à rappeler à Claude.</p>
+      <p>Claude.ai permet de créer des <strong>Projets</strong>, des espaces de conversation avec des instructions permanentes. Une fois le skill installé dans un projet, chaque conversation de ce projet démarre avec les capacités du skill activées. Vous n'avez plus rien à recopier ni à rappeler à Claude.</p>
 
       <div class="setup-step">
         <div class="setup-step-num">1</div>
@@ -523,7 +523,7 @@ Motivation (2-3 phrases) :
         <div class="setup-step-num">2</div>
         <div class="setup-step-body">
           <p><strong>Accédez aux instructions du projet.</strong></p>
-          <p>Une fois dans le projet, cliquez sur l'icône paramètres (roue dentée) ou sur "Ajouter des instructions". Une zone de texte s'ouvre — c'est là que vit le skill.</p>
+          <p>Une fois dans le projet, cliquez sur l'icône paramètres (roue dentée) ou sur "Ajouter des instructions". Une zone de texte s'ouvre: c'est là que vit le skill.</p>
         </div>
       </div>
 
@@ -531,7 +531,7 @@ Motivation (2-3 phrases) :
         <div class="setup-step-num">3</div>
         <div class="setup-step-body">
           <p><strong>Copiez le contenu du SKILL.md ci-dessus et collez-le dans la zone d'instructions.</strong></p>
-          <p>Vous pouvez copier tout le fichier, frontmatter YAML inclus — Claude l'ignore et lit le reste. Sauvegardez.</p>
+          <p>Vous pouvez copier tout le fichier, frontmatter YAML inclus, Claude l'ignore et lit le reste. Sauvegardez.</p>
         </div>
       </div>
 
@@ -539,7 +539,7 @@ Motivation (2-3 phrases) :
         <div class="setup-step-num">4</div>
         <div class="setup-step-body">
           <p><strong>Ouvrez une nouvelle conversation dans ce projet.</strong></p>
-          <p>Collez-y le texte d'une annonce LeBonCoin, SeLoger ou autre — ou décrivez simplement le bien à analyser. Claude pose ses questions, vous répondez, il sort le bilan.</p>
+          <p>Collez-y le texte d'une annonce LeBonCoin, SeLoger ou autre, ou décrivez simplement le bien à analyser. Claude pose ses questions, vous répondez, il sort le bilan.</p>
         </div>
       </div>
 
@@ -552,8 +552,8 @@ Motivation (2-3 phrases) :
       </div>
 
       <h2>Ce que ça ne remplace pas</h2>
-      <p>Le skill calcule à partir des données que vous lui donnez. Si vous sous-estimez les travaux ou surestimez le prix de revente, le bilan sera faux — proprement calculé, mais faux. Le skill ne va pas sur le terrain à votre place.</p>
-      <p>Il ne remplace pas non plus les données de marché réelles : prix de ventes DVF dans le secteur, loyers constatés, contraintes PLU de la parcelle, DPE réel après travaux. Ce sont ces données — les vraies, par adresse — que Prospimmo vous fournit. Le skill fait le calcul. Prospimmo fait le terrain.</p>
+      <p>Le skill calcule à partir des données que vous lui donnez. Si vous sous-estimez les travaux ou surestimez le prix de revente, le bilan sera faux, proprement calculé, mais faux. Le skill ne va pas sur le terrain à votre place.</p>
+      <p>Il ne remplace pas non plus les données de marché réelles : prix de ventes DVF dans le secteur, loyers constatés, contraintes PLU de la parcelle, DPE réel après travaux. Ce sont ces données, les vraies, par adresse, que Prospimmo vous fournit. Le skill fait le calcul. Prospimmo fait le terrain.</p>
 
     </div>
 
@@ -562,7 +562,7 @@ Motivation (2-3 phrases) :
         <p>Prospimmo analyse l'adresse : PLU applicable, DVF sur 500&nbsp;m, DPE et surface cadastrale. Les données réelles qui alimentent votre bilan.</p>
         <a href="../demo.html" class="btn btn-primary">Analyser une adresse →</a>
       </div>
-      <p class="trial-note" style="text-align:center">7 jours offerts · sans carte bancaire</p>
+      <p class="trial-note" style="text-align:center">7 jours offerts</p>
       <a href="../blog.html" class="article-back">← Tous les articles</a>
     </footer>
 
