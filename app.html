@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospimmo — Analyse pré-acquisition</title>
+<meta name="description" content="Analyse PLU, DVF, simulateur de rentabilité, faisabilité et artisans pour vos projets immobiliers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.app-body { background: #fff; }
+.app-wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.search-bar { display: flex; gap: 12px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line-soft); flex-wrap: wrap; }
+.search-bar label { font-weight: 600; font-size: 15px; white-space: nowrap; }
+.search-input-wrap { flex: 1; min-width: 260px; position: relative; }
+.search-input-wrap input { width: 100%; padding: 12px 16px 12px 40px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; background: var(--paper); outline: none; transition: border .2s; }
+.search-input-wrap input:focus { border-color: var(--emerald); }
+.search-input-wrap .pin { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.tabs-bar { display: flex; gap: 0; border-bottom: 2px solid var(--line-soft); overflow-x: auto; scrollbar-width: none; margin-top: 4px; }
+.tab-btn { display: flex; align-items: center; gap: 8px; padding: 14px 22px; font-size: 14px; font-weight: 600; color: var(--muted); background: none; border: none; cursor: pointer; white-space: nowrap; position: relative; transition: color .2s; font-family: 'Inter', sans-serif; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--emerald); border-bottom-color: var(--emerald); }
+.tab-btn .ico { width: 18px; height: 18px; flex-shrink: 0; }
+.tab-content { display: none; padding: 28px 0; }
+.tab-content.active { display: block; }
+.addr-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; padding: 16px 20px; background: var(--paper); border-radius: 12px; border: 1px solid var(--line-soft); }
+.addr-header .pin { color: var(--emerald); flex-shrink: 0; }
+.addr-header h2 { font-size: 18px; font-weight: 700; }
+.addr-header .badge { margin-left: auto; font-size: 12px; font-weight: 600; background: var(--emerald); color: #fff; padding: 4px 12px; border-radius: 100px; font-family: 'JetBrains Mono', monospace; }
+.card-grid { display: grid; gap: 20px; }
+.card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 720px) { .card-grid.cols-2, .card-grid.cols-3 { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 22px; box-shadow: 0 1px 3px rgba(0,0,0,.03); }
+.card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.card .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--muted); background: var(--paper-2); padding: 2px 8px; border-radius: 100px; margin-bottom: 10px; }
+.kpi { font-size: 24px; font-weight: 800; color: var(--emerald); }
+.kpi.amber { color: var(--amber); }
+.kpi-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.data-table th { text-align: left; padding: 10px 12px; font-weight: 600; border-bottom: 2px solid var(--line-soft); color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.data-table td { padding: 10px 12px; border-bottom: 1px solid var(--line-soft); }
+.data-table tr:last-child td { border-bottom: none; }
+.slider-group { margin-bottom: 18px; }
+.slider-group label { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.slider-group .val { font-family: 'JetBrains Mono', monospace; color: var(--emerald); font-weight: 700; }
+.slider-group input[type=range] { width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: var(--line-soft); border-radius: 4px; outline: none; }
+.slider-group input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--emerald); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+.sim-result { background: var(--paper); border-radius: 12px; padding: 20px; margin-top: 16px; border: 1px solid var(--line-soft); }
+.sim-result .line { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
+.sim-result .line:last-child { border-bottom: none; font-weight: 700; }
+.sim-result .line .val { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--emerald); }
+.sim-result .line .val.amber { color: var(--amber); }
+.upload-zone { border: 2px dashed var(--line); border-radius: 14px; padding: 48px 24px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+.upload-zone:hover { border-color: var(--emerald); background: rgba(31,107,79,.04); }
+.upload-zone .ico { color: var(--muted); margin-bottom: 12px; }
+.upload-zone p { font-size: 15px; color: var(--muted); }
+.upload-zone .highlight { color: var(--emerald); font-weight: 600; }
+.map-placeholder { background: var(--paper); border-radius: 12px; height: 280px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-soft); color: var(--muted); font-size: 15px; flex-direction: column; gap: 12px; }
+.artisan-card { display: flex; gap: 16px; align-items: flex-start; padding: 16px; border: 1px solid var(--line-soft); border-radius: 12px; background: var(--card); }
+.artisan-card .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--paper-2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--emerald); flex-shrink: 0; font-size: 18px; }
+.artisan-card h4 { font-size: 15px; font-weight: 700; margin: 0 0 2px; }
+.artisan-card .meta { font-size: 13px; color: var(--muted); }
+.artisan-card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.artisan-card .tags span { font-size: 11px; font-weight: 600; background: var(--paper-2); padding: 2px 8px; border-radius: 100px; color: var(--ink-soft); }
+</style>
+</head>
+<body class="app-body">
+<header class="nav">
+  <div class="wrap nav-in">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Prospimmo" class="brand-logo" width="120" height="32">
+    </a>
+    <nav class="links">
+      <a href="index.html#principe">Le principe</a>
+      <a href="index.html#features">Données</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="btn btn-primary" style="opacity:.5;pointer-events:none;font-size:13px">Connecté</span>
+  </div>
+</header>
+<main class="app-wrap">
+  <div class="search-bar">
+    <label for="addr-input">📍 Adresse</label>
+    <div class="search-input-wrap">
+      <svg class="pin" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 14s4-3.5 4-6.5A4 4 0 004 7.5C4 10.5 8 14 8 14z" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="8" cy="7.5" r="1.5" fill="currentColor"/>
+      </svg>
+      <input id="addr-input" type="text" placeholder="Saisissez une adresse…" value="12 rue des Lilas, 69100 Villeurbanne" autocomplete="street-address">
+    </div>
+    <button class="btn btn-primary" id="analyze-btn">Analyser</button>
+  </div>
+  <div class="addr-header">
+    <svg class="pin" width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 18s5-4.2 5-7.8A5 5 0 005 10.2C5 13.8 10 18 10 18z" stroke="var(--emerald)" stroke-width="1.6"/>
+      <circle cx="10" cy="9.5" r="2" fill="var(--emerald)"/>
+    </svg>
+    <h2 id="display-addr">12 rue des Lilas, 69100 Villeurbanne</h2>
+    <span class="badge">Parcelle AK 214 · 612 m²</span>
+  </div>
+  <div class="tabs-bar" role="tablist">
+    <button class="tab-btn active" data-tab="analyse" role="tab" aria-selected="true">
+      <svg class="ico" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Analyse PLU
+    </button>
+    <button class="tab-btn" data-tab="simulateur" role="tab" aria-selected="false">
+      <svg class="ico" viewBox="0 0 20 20" fill="none"><path d="M3 10l2-5 2 7 2-9 2 8 2-6 2 8 2-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Simulateur
+    </button>
+    <button class="tab-btn" data-tab="dvf" role="tab" aria-selected="false">
+      <svg class="ico" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 3V2M10 18v-1M17 10h1M2 10h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Marché DVF
+    </button>
+    <button class="tab-btn" data-tab="faisabilite" role="tab" aria-selected="false">
+      <svg class="ico" viewBox="0 0 20 20" fill="none"><path d="M4 5h7M4 9h12M4 13h9M4 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Faisabilité
+    </button>
+    <button class="tab-btn" data-tab="artisans" role="tab" aria-selected="false">
+      <svg class="ico" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 18c0-2.2 3.1-4 7-4s7 1.8 7 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Artisans
+    </button>
+  </div>
+  <section class="tab-content active" id="tab-analyse" role="tabpanel">
+    <div class="card-grid cols-2">
+      <div class="card">
+        <span class="tag">Zone PLU</span>
+        <h3>Règlement applicable</h3>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px">
+          <span style="font-size:32px;font-weight:800;color:var(--emerald);font-family:'JetBrains Mono'">UC2</span>
+          <span style="color:var(--muted)">— habitat, commerce, services</span>
+        </div>
+        <table class="data-table">
+          <tr><th>Règle</th><th>Valeur</th></tr>
+          <tr><td>Hauteur max</td><td><strong>13 m</strong> (R+3)</td></tr>
+          <tr><td>CES</td><td><strong>0,40</strong> (245 m² sur 612 m²)</td></tr>
+          <tr><td>Emprise au sol</td><td><strong>40 %</strong></td></tr>
+          <tr><td>Stationnement</td><td>2 places / logement créé</td></tr>
+          <tr><td>Recul min</td><td>4 m des limites séparatives</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <span class="tag">Destinations</span>
+        <h3>Constructions autorisées</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--go);font-size:18px">✓</span> Habitation</div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--go);font-size:18px">✓</span> Commerce et artisanat</div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--go);font-size:18px">✓</span> Bureaux et services</div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--go);font-size:18px">✓</span> Equipements d'interet collectif</div>
+          <div style="display:flex;align-items:center;gap:10px;color:var(--muted)"><span style="font-size:18px">✗</span> Industrie</div>
+        </div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <span class="tag">Synthese IA</span>
+        <h3>Ce qu'il faut retenir</h3>
+        <p style="color:var(--ink-soft);line-height:1.7;margin-top:8px">
+          La parcelle est en zone <strong>UC2</strong>, une zone urbaine mixte permettant habitat et commerces.
+          Avec un CES de 0,40 et une hauteur max de 13 m (R+3), le potentiel de surelevation est
+          <strong>favorable</strong> : le bati actuel est en R+2, une surelevation d'un niveau reste
+          possible sous reserve du respect des prospects. Les regles de stationnement (2 places/logement)
+          sont le principal point d'attention en cas de division en lots.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="tab-content" id="tab-simulateur" role="tabpanel">
+    <div class="card-grid cols-2">
+      <div class="card">
+        <span class="tag" style="color:var(--amber)">💰 Simulateur</span>
+        <h3>Parametres de l'operation</h3>
+        <div style="margin-top:10px">
+          <div class="slider-group">
+            <label>Prix d'achat <span class="val" id="sim-prix-val">350 000 €</span></label>
+            <input type="range" id="sim-prix" min="100000" max="800000" value="350000" step="10000">
+          </div>
+          <div class="slider-group">
+            <label>Surface (m²) <span class="val" id="sim-surface-val">120 m²</span></label>
+            <input type="range" id="sim-surface" min="30" max="500" value="120" step="5">
+          </div>
+          <div class="slider-group">
+            <label>Coût des travaux (€/m²) <span class="val" id="sim-travaux-val">600 €</span></label>
+            <input type="range" id="sim-travaux" min="0" max="2500" value="600" step="50">
+          </div>
+          <div class="slider-group">
+            <label>Prix de revente cible <span class="val" id="sim-revente-val">520 000 €</span></label>
+            <input type="range" id="sim-revente" min="150000" max="1200000" value="520000" step="10000">
+          </div>
+          <div class="slider-group">
+            <label>Nombre de lots <span class="val" id="sim-lots-val">3</span></label>
+            <input type="range" id="sim-lots" min="1" max="10" value="3" step="1">
+          </div>
+          <div class="slider-group">
+            <label>TVA sur marge <span class="val" id="sim-tva-val">20 %</span></label>
+            <input type="range" id="sim-tva" min="0" max="20" value="20" step="5">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag" style="color:var(--amber)">📊 Resultat</span>
+        <h3>Rentabilite estimee</h3>
+        <div class="sim-result" id="sim-result">
+          <div class="line"><span>Coût d'acquisition</span><span class="val" id="r-acq">355 250 €</span></div>
+          <div class="line"><span>Travaux TTC</span><span class="val" id="r-travaux">72 000 €</span></div>
+          <div class="line"><span>Frais financiers</span><span class="val" id="r-financiers">12 650 €</span></div>
+          <div class="line"><span>Frais de commercialisation</span><span class="val" id="r-com">18 200 €</span></div>
+          <div class="line"><span>Coût de revient total</span><span class="val" id="r-cout">458 100 €</span></div>
+          <div class="line"><span>Prix de revente</span><span class="val" id="r-revente">520 000 €</span></div>
+          <div class="line" style="border-bottom:none"><span>Marge nette</span><span class="val amber" id="r-marge">61 900 € (13,5 %)</span></div>
+        </div>
+        <div style="margin-top:14px;padding:14px;background:var(--paper-2);border-radius:10px;font-size:13px;color:var(--muted)">
+          ⚡ <strong>TVA sur marge estimee</strong> : <span id="r-tva-info">27 500 €</span> (regime art. 268 CGI)
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="tab-content" id="tab-dvf" role="tabpanel">
+    <div class="card-grid cols-2">
+      <div class="card">
+        <span class="tag">📈 Marche</span>
+        <h3>Ventes recentes (rayon 500 m)</h3>
+        <table class="data-table">
+          <thead><tr><th>Adresse</th><th>Surface</th><th>Prix</th><th>€/m²</th><th>Date</th></tr></thead>
+          <tbody>
+            <tr><td>8 rue des Lilas</td><td>75 m²</td><td>243 000 €</td><td><strong>3 240</strong></td><td>03/2026</td></tr>
+            <tr><td>15 av. du Parc</td><td>92 m²</td><td>299 000 €</td><td><strong>3 250</strong></td><td>01/2026</td></tr>
+            <tr><td>3 bd de la Liberation</td><td>110 m²</td><td>357 000 €</td><td><strong>3 245</strong></td><td>11/2025</td></tr>
+            <tr><td>22 rue de la Paix</td><td>63 m²</td><td>201 600 €</td><td><strong>3 200</strong></td><td>09/2025</td></tr>
+            <tr><td>7 place de l'Eglise</td><td>85 m²</td><td>276 000 €</td><td><strong>3 247</strong></td><td>06/2025</td></tr>
+            <tr><td>12 rue des Lilas</td><td>120 m²</td><td>389 000 €</td><td><strong>3 242</strong></td><td>04/2025</td></tr>
+            <tr><td>30 rue de la Republique</td><td>55 m²</td><td>181 500 €</td><td><strong>3 300</strong></td><td>02/2025</td></tr>
+            <tr><td>18 rue du Commerce</td><td>140 m²</td><td>462 000 €</td><td><strong>3 300</strong></td><td>12/2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <span class="tag">📊 Indicateurs</span>
+          <h3>Synthese DVF</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px">
+            <div><div class="kpi">8</div><div class="kpi-sub">mutations inf. 300 m</div></div>
+            <div><div class="kpi">3 250 €</div><div class="kpi-sub">prix median / m²</div></div>
+            <div><div class="kpi">3 281 €</div><div class="kpi-sub">prix moyen / m²</div></div>
+            <div><div class="kpi amber">+3,2 %</div><div class="kpi-sub">evolution sur 1 an</div></div>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="map-placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+            <span>Carte des mutations DVF</span>
+            <span style="font-size:12px">8 ventes affichees dans un rayon de 500 m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="tab-content" id="tab-faisabilite" role="tabpanel">
+    <div class="card-grid cols-2">
+      <div class="card" style="grid-column:1/-1">
+        <span class="tag">📄 Analyse</span>
+        <h3>Deposez votre document ou descriptif</h3>
+        <p style="color:var(--muted);margin-bottom:20px;font-size:14px">
+          Joignez un document PDF, une image ou un texte decrivant votre projet.
+          L'IA analyse la faisabilite reglementaire et financiere en quelques minutes.
+        </p>
+        <div class="upload-zone" id="upload-zone">
+          <div class="ico">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p>Glissez-deposez un fichier ici ou <span class="highlight">cliquez pour parcourir</span></p>
+          <p style="font-size:12px;margin-top:8px">PDF, PNG, JPG — 10 Mo max</p>
+          <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.txt" style="display:none">
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag">📋 Projets recents</span>
+        <h3>Analyses disponibles</h3>
+        <div style="margin-top:6px;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:12px;background:var(--paper);border-radius:10px;border:1px solid var(--line-soft)">
+            <div style="display:flex;justify-content:space-between;font-size:13px">
+              <strong>Suremention R+3</strong>
+              <span style="color:var(--go);font-weight:600">✓ Favorable</span>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">12 rue des Lilas · 22/07/2026</div>
+          </div>
+          <div style="padding:12px;background:var(--paper);border-radius:10px;border:1px solid var(--line-soft)">
+            <div style="display:flex;justify-content:space-between;font-size:13px">
+              <strong>Division en 4 lots</strong>
+              <span style="color:var(--amber);font-weight:600">⚠ Sous conditions</span>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">12 rue des Lilas · 20/07/2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag">🧠 IA</span>
+        <h3>Verdict faisabilite</h3>
+        <div style="margin-top:10px;padding:14px;background:var(--paper);border-radius:10px;font-size:14px;line-height:1.7">
+          <p style="margin-bottom:8px"><strong>Projet :</strong> Suremention d'un niveau (R+2 → R+3)</p>
+          <p style="margin-bottom:8px"><strong>Conformite PLU :</strong> <span style="color:var(--go);font-weight:600">✓ OK</span></p>
+          <p style="margin-bottom:8px"><strong>Hauteur projetee :</strong> 11,5 m (limite 13 m) → conforme</p>
+          <p style="margin-bottom:8px"><strong>CES projete :</strong> 0,35 (limite 0,40) → conforme</p>
+          <p><strong>Risques identifies :</strong> Permis de construire necessaire. Verifier l'avis de l'ABF si secteur protege.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="tab-content" id="tab-artisans" role="tabpanel">
+    <div class="card-grid cols-2" style="margin-bottom:20px">
+      <div class="card">
+        <span class="tag">👥 Secteur</span>
+        <h3>Artisans et entreprises a proximite</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:4px">Dans un rayon de 10 km autour de l'adresse</p>
+      </div>
+      <div class="card">
+        <span class="tag">📊 Stats</span>
+        <h3>Apercu du marche artisanal</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px">
+          <div><div class="kpi" style="font-size:20px">24</div><div class="kpi-sub">artisans references</div></div>
+          <div><div class="kpi amber" style="font-size:20px">4,4</div><div class="kpi-sub">note moyenne</div></div>
+          <div><div class="kpi" style="font-size:20px">6</div><div class="kpi-sub">corps de metier</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-grid cols-2" id="artisans-list">
+      <div class="artisan-card">
+        <div class="avatar">MB</div>
+        <div>
+          <h4>Maconnerie Bati Conseil</h4>
+          <div class="meta">📍 3 rue du Travail, 69100 Villeurbanne · 1,2 km</div>
+          <div class="meta">⭐ 4,7 · 23 avis · Devis sous 48h</div>
+          <div class="tags"><span>Maconnerie</span><span>Gros œuvre</span><span>Renovation structure</span></div>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="avatar">EC</div>
+        <div>
+          <h4>Electricite Courant SAS</h4>
+          <div class="meta">📍 15 av. de la Republique, 69100 Villeurbanne · 0,8 km</div>
+          <div class="meta">⭐ 4,5 · 31 avis · Certifie RGE</div>
+          <div class="tags"><span>Electricite</span><span>Domotique</span><span>RGE</span></div>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="avatar">PC</div>
+        <div>
+          <h4>Plomberie Chauffage Durand</h4>
+          <div class="meta">📍 8 rue de l'Eau, 69100 Villeurbanne · 0,5 km</div>
+          <div class="meta">⭐ 4,6 · 18 avis · Urgences 7j/7</div>
+          <div class="tags"><span>Plomberie</span><span>Chauffage</span><span>Climatisation</span></div>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="avatar">MC</div>
+        <div>
+          <h4>Menuiserie Creation Bois</h4>
+          <div class="meta">📍 22 rue du Bois, 69100 Villeurbanne · 1,5 km</div>
+          <div class="meta">⭐ 4,8 · 15 avis · Sur-mesure</div>
+          <div class="tags"><span>Menuiserie</span><span>Agencement</span><span>Parquet</span></div>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="avatar">CP</div>
+        <div>
+          <h4>Couverture Plomberie Petit</h4>
+          <div class="meta">📍 5 rue du Toit, 69100 Villeurbanne · 1,1 km</div>
+          <div class="meta">⭐ 4,3 · 12 avis · Zinguerie</div>
+          <div class="tags"><span>Couverture</span><span>Zinguerie</span><span>Etancheite</span></div>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="avatar">PE</div>
+        <div>
+          <h4>Peinture et Enduits Lyon</h4>
+          <div class="meta">📍 12 rue des Arts, 69100 Villeurbanne · 0,9 km</div>
+          <div class="meta">⭐ 4,4 · 27 avis · Devis gratuit</div>
+          <div class="tags"><span>Peinture</span><span>Revetement</span><span>Ravalement</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer style="border-top:1px solid var(--line-soft);margin-top:40px">
+  <div class="wrap foot-in" style="padding:24px 0">
+    <a class="brand" href="index.html" style="font-size:14px">
+      <svg class="mark" viewBox="0 0 30 30" fill="none" style="width:24px;height:24px"><rect x="1" y="1" width="28" height="28" rx="7" fill="#1F6B4F"/><path d="M9 20.5V11l6-3.5 6 3.5v9.5" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="15" cy="14.5" r="2.4" fill="#E8A33D"/></svg>
+      <span style="color:var(--ink)">Prospimmo</span>
+    </a>
+    <nav class="foot-links">
+      <a href="index.html#features">Donnees</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span>© 2026 Prospimmo</span>
+  </div>
+</footer>
+<script>
+(function(){
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      contents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+  const simPrix = document.getElementById('sim-prix');
+  const simSurface = document.getElementById('sim-surface');
+  const simTravaux = document.getElementById('sim-travaux');
+  const simRevente = document.getElementById('sim-revente');
+  const simLots = document.getElementById('sim-lots');
+  const simTva = document.getElementById('sim-tva');
+  function formatEuro(v) { return v.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }); }
+  function updateSim() {
+    const prix = +simPrix.value, surface = +simSurface.value, travauxM2 = +simTravaux.value;
+    const revente = +simRevente.value, lots = +simLots.value, tvaPct = +simTva.value;
+    document.getElementById('sim-prix-val').textContent = formatEuro(prix);
+    document.getElementById('sim-surface-val').textContent = surface + ' m²';
+    document.getElementById('sim-travaux-val').textContent = travauxM2 + ' €';
+    document.getElementById('sim-revente-val').textContent = formatEuro(revente);
+    document.getElementById('sim-lots-val').textContent = lots;
+    document.getElementById('sim-tva-val').textContent = tvaPct + ' %';
+    const fn = prix * 0.015, tt = surface * travauxM2 * 1.10, cap = prix + fn + tt;
+    const ff = cap * 0.038 * 1.5 + cap * 0.01 + cap * 0.0025 * 1.5;
+    const fc = revente * 0.035, ct = prix + fn + tt + ff + fc + 2500;
+    const mg = revente - ct, mgPct = (mg / ct * 100);
+    const tvam = tvaPct > 0 ? ((revente - prix) * tvaPct / 100 / 6) : 0;
+    document.getElementById('r-acq').textContent = formatEuro(prix + fn);
+    document.getElementById('r-travaux').textContent = formatEuro(tt);
+    document.getElementById('r-financiers').textContent = formatEuro(ff);
+    document.getElementById('r-com').textContent = formatEuro(fc);
+    document.getElementById('r-cout').textContent = formatEuro(ct);
+    document.getElementById('r-revente').textContent = formatEuro(revente);
+    document.getElementById('r-marge').textContent = formatEuro(mg) + ' (' + mgPct.toFixed(1) + ' %)';
+    document.getElementById('r-marge').style.color = mg < 0 ? '#c0392b' : '';
+    document.getElementById('r-tva-info').textContent = formatEuro(tvam) + (tvaPct > 0 ? ' (art. 268 CGI)' : ' (non applicable)');
+  }
+  [simPrix, simSurface, simTravaux, simRevente, simLots, simTva].forEach(el => el.addEventListener('input', updateSim));
+  updateSim();
+  const uz = document.getElementById('upload-zone'), fi = document.getElementById('file-input');
+  if (uz && fi) {
+    uz.addEventListener('click', () => fi.click());
+    uz.addEventListener('dragover', (e) => { e.preventDefault(); uz.style.borderColor = 'var(--emerald)'; uz.style.background = 'rgba(31,107,79,.06)'; });
+    uz.addEventListener('dragleave', () => { uz.style.borderColor = ''; uz.style.background = ''; });
+    uz.addEventListener('drop', (e) => { e.preventDefault(); uz.style.borderColor = ''; uz.style.background = ''; if (e.dataTransfer.files.length) { uz.querySelector('p').innerHTML = '✓ <strong>' + e.dataTransfer.files[0].name + '</strong> charge'; } });
+    fi.addEventListener('change', () => { if (fi.files.length) { uz.querySelector('p').innerHTML = '✓ <strong>' + fi.files[0].name + '</strong> charge'; } });
+  }
+  var t = document.querySelector('.nav-toggle'), m = document.querySelector('nav.links');
+  if (t && m) {
+    t.addEventListener('click', function() { var o = m.classList.toggle('open'); t.setAttribute('aria-expanded', String(o)); });
+    document.addEventListener('click', function(e) { if (m.classList.contains('open') && !t.contains(e.target) && !m.contains(e.target)) { m.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); } });
+  }
+})();
+</script>
+</body>
+</html>
