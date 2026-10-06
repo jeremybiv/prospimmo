@@ -8,9 +8,15 @@
   </url>
   <url>
     <loc>https://prospimmo.fr/blog.html</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://prospimmo.fr/blog/analyser-dvf-comparable-marche-fiable.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://prospimmo.fr/blog/pieges-gpu-geoportail-urbanisme.html</loc>
