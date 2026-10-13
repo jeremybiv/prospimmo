@@ -8,7 +8,7 @@ Règle permanente : aucun sujet lié aux OAP (Orientations d'Aménagement et de 
 
 1. `done` (2026-10-03) — 3 pièges du GPU que les MdB découvrent trop tard — `blog/pieges-gpu-geoportail-urbanisme.html`
 2. `done` (2026-10-06) — DVF : comment évaluer un comparable de marché fiable — `blog/analyser-dvf-comparable-marche-fiable.html`
-3. `pending` — Division parcellaire : ce que dit vraiment le règlement — mot-clé cible "faisabilité division parcellaire"
+3. `done` (2026-10-13) — Division parcellaire : ce que dit vraiment le règlement — `blog/division-parcellaire-reglement-faisabilite.html`
 4. `pending` — SAFER et Vigifoncier : la vigilance foncière méconnue — mot-clé cible "SAFER droit de préemption"
 5. `pending` — Servitudes d'utilité publique : les angles morts du zonage — mot-clé cible "servitude urbanisme vérifier"
 6. `pending` — Cadastre : les erreurs de lecture les plus fréquentes — mot-clé cible "lire plan cadastral"
