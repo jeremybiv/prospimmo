@@ -8,9 +8,15 @@
   </url>
   <url>
     <loc>https://prospimmo.fr/blog.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://prospimmo.fr/blog/safer-vigifoncier-droit-preemption.html</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://prospimmo.fr/blog/division-parcellaire-reglement-faisabilite.html</loc>
