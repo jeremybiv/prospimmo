@@ -64,6 +64,10 @@
         <input id="f-mail" type="email" placeholder="vous@exemple.fr" autocomplete="email">
       </div>
       <div class="field">
+        <label for="f-tel">Téléphone / WhatsApp <span style="color:var(--muted);font-weight:400">(facultatif)</span></label>
+        <input id="f-tel" type="tel" placeholder="06 12 34 56 78" autocomplete="tel">
+      </div>
+      <div class="field">
         <label for="f-sub">Sujet</label>
         <div class="select-wrap">
           <select id="f-sub">
@@ -141,6 +145,7 @@
     var name    = (document.getElementById('f-name').value || '').trim();
     var company = (document.getElementById('f-comp').value || '').trim();
     var email   = (document.getElementById('f-mail').value || '').trim();
+    var phone   = (document.getElementById('f-tel').value || '').trim();
     var subject = document.getElementById('f-sub').value;
     var message = (document.getElementById('f-msg').value || '').trim();
 
@@ -157,7 +162,7 @@
     fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, company: company, email: email, subject: subject, message: message })
+      body: JSON.stringify({ name: name, company: company, email: email, phone: phone, subject: subject, message: message })
     })
     .then(function(r){ return r.json(); })
     .then(function(data){
@@ -166,6 +171,7 @@
         document.getElementById('f-name').value = '';
         document.getElementById('f-comp').value = '';
         document.getElementById('f-mail').value = '';
+        document.getElementById('f-tel').value  = '';
         document.getElementById('f-msg').value  = '';
         btn.textContent = 'Message envoyé';
       } else {
