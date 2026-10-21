@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
-  const { name, company, email, subject, message } = req.body || {};
+  const { name, company, email, phone, subject, message } = req.body || {};
 
   if (!name || !email || !message) {
     return res.status(400).json({ ok: false, error: 'Champs requis manquants.' });
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     `Nom : ${name}`,
     company ? `Société : ${company}` : null,
     `E-mail : ${email}`,
+    phone ? `Téléphone : ${String(phone).slice(0, 30)}` : null,
     `Sujet : ${subject || 'Non précisé'}`,
     '',
     message,

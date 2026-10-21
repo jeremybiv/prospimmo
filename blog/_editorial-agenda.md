@@ -18,6 +18,7 @@ Règle permanente : aucun sujet lié aux OAP (Orientations d'Aménagement et de 
 10. `pending` — TVA sur marge : comprendre l'article 268 CGI sans s'y perdre — mot-clé cible "TVA marge immobilier calcul"
 11. `pending` — Frais de notaire réduits MdB : l'engagement de revente à 5 ans expliqué — mot-clé cible "frais notaire réduits marchand de biens"
 12. `pending` — Bilan : ce qu'on a appris en analysant des dossiers de faisabilité — contenu de marque, chiffres agrégés anonymisés
+13. `done` (2026-10-21) — Analyse IA d'annonce et agent de prospection (article hors agenda, sur demande) — `blog/analyse-ia-annonce-agent-prospection.html`
 
 ## Notes
 - Longueur cible : 800-1200 mots, structure H1 (titre)/H2, ton direct sans blabla (cf. articles existants dans `blog/`).
