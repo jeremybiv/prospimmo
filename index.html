@@ -540,6 +540,20 @@
     var email = (document.getElementById('nl-email').value || '').trim();
     msg.style.display = 'none';
     if (!email) return;
+    // ── FIX 23/10/2026 (issue #34) ──────────────────────────────────────
+    // Le formulaire est en `novalidate` et n'avait AUCUNE validation client :
+    // saisir « abc » déclenchait quand même POST /api/newsletter → 400 +
+    // « Failed to load resource: 400 » en console. On valide en local avant
+    // l'aller-retour réseau (le serveur garde sa validation en filet).
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)) {
+      msg.textContent = 'Adresse e-mail invalide.';
+      msg.style.background = 'rgba(197,34,31,.08)';
+      msg.style.color = '#C5221F';
+      msg.style.border = '1px solid rgba(197,34,31,.25)';
+      msg.style.display = 'block';
+      document.getElementById('nl-email').focus();
+      return;
+    }
     var btn = form.querySelector('button');
     btn.disabled = true;
     btn.textContent = 'Inscription…';
@@ -594,6 +608,18 @@
       m.classList.remove('open');
       t.setAttribute('aria-expanded','false');
     }
+  });
+  // ── FIX 23/10/2026 (issue #32) ────────────────────────────────────────
+  // Le menu ne se fermait PAS au clic sur un lien d'ancre : le handler
+  // « clic extérieur » ci-dessus ignore tout clic À L'INTÉRIEUR du menu
+  // (`m.contains(e.target)` est vrai). Résultat : le panneau (370 px sur un
+  // viewport de 812) restait ouvert par-dessus la section cible — le scroll
+  // était bon mais l'utilisateur voyait le menu, donc « rien ne se passe ».
+  m.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      m.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    });
   });
 })();
 </script>

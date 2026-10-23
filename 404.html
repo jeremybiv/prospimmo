@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title>Page introuvable | Prospimmo</title>
+<meta name="description" content="Cette page n'existe pas ou a été déplacée. Retrouvez Prospimmo : l'outil d'aide à la décision pré-acquisition pour marchands de biens.">
+<meta name="robots" content="noindex, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prospimmo">
+<meta property="og:title" content="Page introuvable | Prospimmo">
+<meta property="og:image" content="https://prospimmo.fr/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="brand" href="/">
+      <img src="/logo.png" alt="Prospimmo" class="brand-logo">
+    </a>
+    <nav class="links">
+      <a href="/index.html#principe">Le principe</a>
+      <a href="/index.html#features">Données</a>
+      <a href="/pricing.html">Tarifs</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/demo.html">Démo</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <a href="https://app.prospimmo.fr/?signup=true" class="btn btn-primary"><span class="nav-cta-long">Obtenir l'accès gratuit</span><span class="nav-cta-short">Accès</span></a>
+  </div>
+</header>
+
+<main>
+<section class="page-hero">
+  <div class="parcels"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <span class="eyebrow"><span class="dot"></span> Erreur 404</span>
+    <h1>Cette page n'existe pas</h1>
+    <p style="max-width:620px;margin:18px 0 0">
+      Le lien est peut-être obsolète, ou l'adresse mal orthographiée.
+      Pas de panique : tout Prospimmo est à un clic.
+    </p>
+  </div>
+</section>
+
+<section style="padding:56px 0 80px">
+  <div class="wrap">
+    <h2 style="font-family:var(--font-display);font-size:1.4rem;margin:0 0 20px">Où voulez-vous aller&nbsp;?</h2>
+    <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:900px">
+      <a class="btn" href="/" style="justify-content:flex-start;padding:18px 20px">🏠 &nbsp;Accueil — découvrir Prospimmo</a>
+      <a class="btn" href="/blog.html" style="justify-content:flex-start;padding:18px 20px">📚 &nbsp;Blog — analyses PLU, servitudes, DVF</a>
+      <a class="btn" href="/pricing.html" style="justify-content:flex-start;padding:18px 20px">💳 &nbsp;Tarifs et formules</a>
+      <a class="btn" href="/contact.html" style="justify-content:flex-start;padding:18px 20px">✉️ &nbsp;Nous contacter</a>
+    </div>
+    <p style="margin:32px 0 0;color:var(--muted,#5f6368);font-size:.95rem">
+      Vous cherchiez une annonce analysée&nbsp;?
+      <a href="https://app.prospimmo.fr/" style="color:var(--emerald-deep,#1F6B4F);font-weight:600">Ouvrir l'application →</a>
+    </p>
+  </div>
+</section>
+</main>
+
+<footer style="padding:40px 0;border-top:1px solid rgba(0,0,0,.08)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted,#5f6368)">
+    <span>© 2026 Prospimmo — outil d'aide à la décision pré-acquisition.</span>
+    <span style="display:flex;gap:18px;flex-wrap:wrap">
+      <a href="/cgv.html">CGV</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/blog.html">Blog</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle');
+  var m=document.querySelector('nav.links');
+  if(!t||!m)return;
+  t.addEventListener('click',function(){
+    var o=m.classList.toggle('open');
+    t.setAttribute('aria-expanded',String(o));
+  });
+  document.addEventListener('click',function(e){
+    if(m.classList.contains('open')&&!t.contains(e.target)&&!m.contains(e.target)){
+      m.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    }
+  });
+  m.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      m.classList.remove('open');
+      t.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+</script>
+</body>
+</html>
