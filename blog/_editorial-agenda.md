@@ -10,7 +10,7 @@ Règle permanente : aucun sujet lié aux OAP (Orientations d'Aménagement et de 
 2. `done` (2026-10-06) — DVF : comment évaluer un comparable de marché fiable — `blog/analyser-dvf-comparable-marche-fiable.html`
 3. `done` (2026-10-13) — Division parcellaire : ce que dit vraiment le règlement — `blog/division-parcellaire-reglement-faisabilite.html`
 4. `done` (2026-10-20) — SAFER et Vigifoncier : la vigilance foncière méconnue — `blog/safer-vigifoncier-droit-preemption.html`
-5. `pending` — Servitudes d'utilité publique : les angles morts du zonage — mot-clé cible "servitude urbanisme vérifier"
+5. `done` (2026-10-23) — Servitudes d'utilité publique : les angles morts du zonage — `blog/servitudes-utilite-publique-angles-morts-zonage.html`
 6. `pending` — Cadastre : les erreurs de lecture les plus fréquentes — mot-clé cible "lire plan cadastral"
 7. `pending` — Permis de construire vs déclaration préalable : quel régime pour votre projet — mot-clé cible "permis de construire déclaration préalable différence"
 8. `pending` — Étude de cas complète : d'une annonce à la décision d'achat — mot-clé cible "étude faisabilité immobilière exemple"
