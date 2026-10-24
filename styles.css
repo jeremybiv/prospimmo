@@ -225,7 +225,7 @@
   /* ---------- FOOTER ---------- */
   footer{border-top:1px solid var(--line-soft);padding:46px 0;color:var(--muted);font-size:13.5px}
   .foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-  .foot-links{display:flex;gap:26px}
+  .foot-links{display:flex;gap:10px 22px;flex-wrap:wrap}
   .foot-links a:hover{color:var(--emerald)}
 
   /* reveal au scroll */
@@ -375,3 +375,33 @@
 .article-cta-box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .article-cta-box p{font-size:15px;color:var(--ink-soft);margin:0;max-width:42ch}
 @media(max-width:640px){.article-cta-box{flex-direction:column;align-items:flex-start}.article-cta-box .btn{width:100%;text-align:center}}
+
+/* ============================================================
+   PIVOT AGENT IA (hero analyse IA, étapes agent, division)
+   ============================================================ */
+.agent{padding:100px 0 40px}
+.agent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.agent-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;position:relative;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.agent-card:hover{transform:translateY(-4px);box-shadow:0 24px 44px -30px rgba(20,33,28,.5);border-color:var(--emerald)}
+.agent-card .num{font-family:'JetBrains Mono';font-size:12px;font-weight:700;color:var(--amber-deep);letter-spacing:.1em}
+.agent-card .ico{width:42px;height:42px;border-radius:11px;background:rgba(31,107,79,.09);color:var(--emerald);display:flex;align-items:center;justify-content:center;margin:14px 0 16px}
+.agent-card h3{font-size:19px;margin-bottom:9px}
+.agent-card p{font-size:14.5px;color:var(--ink-soft)}
+.agent-card .tab{display:inline-block;margin-top:14px;font-family:'JetBrains Mono';font-size:11px;color:var(--muted)}
+.agent-foot{margin-top:30px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:15px;color:var(--ink-soft)}
+@media(max-width:1000px){.agent-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.agent-grid{grid-template-columns:1fr}}
+
+.plu-div{padding:100px 0}
+.opt-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 24px 50px -34px rgba(20,33,28,.5)}
+.opt-card .crumb{font-family:'JetBrains Mono';font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line-soft);margin-bottom:14px}
+.opt{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.opt:last-of-type{border-bottom:none}
+.opt .lbl{font-family:'JetBrains Mono';font-size:11px;font-weight:700;color:var(--emerald-deep);background:rgba(31,107,79,.10);border-radius:6px;padding:2px 8px}
+.opt b{font-family:'Bricolage Grotesque';font-weight:600;font-size:15px}
+.opt span.d{grid-column:2;font-size:13.5px;color:var(--ink-soft)}
+.opt-card .src{display:block;font-family:'JetBrains Mono';font-size:10.5px;color:var(--muted);margin-top:10px}
+.plu-link{display:inline-block;margin-top:22px;color:var(--emerald);font-weight:600;font-size:15px}
+.plu-link:hover{text-decoration:underline}
+
+.page-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}

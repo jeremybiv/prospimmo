@@ -1,14 +1,14 @@
 # mdb-website
 
-Site vitrine du SaaS d'aide à la décision pré-acquisition immobilière (pour marchands de biens).
+Site vitrine de Prospimmo, l'agent IA de prospection immobilière pour marchands de biens.
 
-À partir d'une adresse, l'outil centralise et synthétise : analyse PLU/PLUiH, données DVF, cadastre/parcellaire, simulateur de rentabilité et détection de biens à rénover en off-market.
+L'agent scanne les annonces, retrouve l'adresse (croisement DPE/ADEME), chiffre les travaux poste par poste, calcule la marge (TVA sur marge, IS) et analyse le PLU pour identifier les options de division. Les biens retenus arrivent par e-mail et dans l'application, analyse prête. L'analyse PLU / division reste l'argument qui distingue Prospimmo d'une simple alerte annonces.
 
 ## Pages
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | Page d'accueil (principe, données, IA, simplicité, CTA) |
+| `index.html` | Page d'accueil (agent, principe, données, IA, PLU & division, CTA) |
 | `pricing.html` | Tarifs (Découverte / Pro / Cabinet) + FAQ |
 | `contact.html` | Formulaire de contact et coordonnées |
 | `cgv.html` | Conditions générales de vente (modèle à valider juridiquement) |
@@ -18,7 +18,6 @@ Site statique, sans dépendance hors Google Fonts. Ouvrir `index.html` dans un n
 
 ## À finaliser avant mise en ligne
 
-- **Nom & domaine** : le nom « Prospecho » est provisoire (à remplacer partout, ainsi que la mention « Nom & domaine à définir » des pieds de page).
 - **Formulaires** : les boutons d'envoi (contact, capture e-mail) ne sont pas branchés — à connecter à un backend ou un service de formulaire.
 - **CGV** : compléter les champs `[entre crochets]` et faire relire par un juriste.
 - **Tarifs** : montants indicatifs à ajuster.
