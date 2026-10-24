@@ -405,3 +405,19 @@
 .plu-link:hover{text-decoration:underline}
 
 .page-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+
+/* ---------- P1 : chiffrage, confidentialité, limites ---------- */
+.chiffrage{padding:100px 0;background:var(--paper-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.cost-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 24px 50px -34px rgba(20,33,28,.5)}
+.cost-card .crumb{font-family:'JetBrains Mono';font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line-soft);margin-bottom:8px}
+.cost-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.cost-row span:last-child{font-family:'JetBrains Mono';font-weight:700}
+.cost-row.total{border-bottom:none;font-weight:600}
+.cost-row.max{background:linear-gradient(90deg,rgba(232,163,61,.10),transparent);padding:12px 8px;border-radius:8px;border-bottom:none;margin-top:6px}
+.cost-row.max span:last-child{color:var(--amber-deep);font-size:16px}
+.cost-card .hist{font-family:'JetBrains Mono';font-size:12px;color:var(--ink-soft);margin-top:12px;padding-top:12px;border-top:1px solid var(--line-soft)}
+.cost-card .hist b{color:var(--emerald-deep)}
+.cost-card .src{display:block;font-family:'JetBrains Mono';font-size:10.5px;color:var(--muted);margin-top:10px}
+.privacy{padding:100px 0}
+.privacy .agent-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.privacy .agent-grid{grid-template-columns:1fr}}
