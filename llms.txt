@@ -1,0 +1,37 @@
+# Prospimmo
+
+> Prospimmo est un agent IA de prospection immobilière pour marchands de biens (France). Il scanne les annonces, retrouve l'adresse en croisant les données DPE de l'ADEME, chiffre les travaux poste par poste, calcule la marge (TVA sur marge, IS) et analyse le PLU pour identifier les options de division. Les biens retenus arrivent par e-mail et dans l'application, analyse prête. Chaque utilisateur ne voit que les biens qui lui ont été envoyés.
+
+Limites assumées (mesures d'octobre 2026) : sélection qualité plutôt que couverture totale (360 annonces retenues sur 1 273 scannées) ; adresse affichée seulement au-dessus d'un seuil de confiance (343 sur 1 273) ; chiffrage parfois basé sur le DPE quand les photos sont inaccessibles ; l'outil trie, il ne remplace pas les vérifications réglementaires et notariales.
+
+Tarifs : offre Découverte gratuite (sans carte bancaire) ; offre Pro MDB à 22,90 € par mois, 14 jours offerts sans carte bancaire ; offre Cabinet sur demande.
+
+## Guides
+
+- [Agent IA de prospection immobilière : ce qu'il fait vraiment](https://prospimmo.fr/agent-ia-prospection-immobiliere.html): définition, étapes, limites, tarifs
+- [Prospection de marchand de biens : méthodes, outils et tri](https://prospimmo.fr/prospection-marchand-de-biens.html): canaux de prospection et rôle de l'IA
+- [Division parcellaire et PLU](https://prospimmo.fr/division-parcellaire-plu.html): options de division, points du règlement à vérifier
+- [Retrouver l'adresse d'une annonce anonyme avec le DPE](https://prospimmo.fr/off-market-dpe-adresse.html): croisement DPE, indice de confiance, limites
+
+## Pages principales
+
+- [Accueil](https://prospimmo.fr/): présentation de l'agent, PLU et division, chiffrage, confidentialité, transparence
+- [Tarifs](https://prospimmo.fr/pricing.html): formules et FAQ
+- [Démo](https://prospimmo.fr/demo.html): réserver une démo de 20 minutes
+- [Blog](https://prospimmo.fr/blog.html): articles sur le PLU, la marge, la division, la prospection
+
+## Articles de blog
+
+- [Analyse IA d'annonce et agent de prospection](https://prospimmo.fr/blog/analyse-ia-annonce-agent-prospection.html)
+- [Division parcellaire : ce que dit vraiment le règlement](https://prospimmo.fr/blog/division-parcellaire-reglement-faisabilite.html)
+- [Surélévation : ce que le PLU autorise vraiment](https://prospimmo.fr/blog/surelevation-regles-plu-verification.html)
+- [Servitudes d'utilité publique : les angles morts du zonage](https://prospimmo.fr/blog/servitudes-utilite-publique-angles-morts-zonage.html)
+- [SAFER et Vigifoncier : la vigilance foncière méconnue](https://prospimmo.fr/blog/safer-vigifoncier-droit-preemption.html)
+- [Comment calculer une vraie marge en marchand de biens](https://prospimmo.fr/blog/calculer-marge-marchand-de-biens.html)
+- [DVF : construire un comparable fiable](https://prospimmo.fr/blog/analyser-dvf-comparable-marche-fiable.html)
+- [3 pièges du Géoportail de l'Urbanisme](https://prospimmo.fr/blog/pieges-gpu-geoportail-urbanisme.html)
+- [PLU : ce que personne ne vous dit avant d'acheter](https://prospimmo.fr/blog/plu-ce-que-personne-ne-vous-dit.html)
+
+## Contact
+
+- jeremy.bivaud@gmail.com — [formulaire](https://prospimmo.fr/contact.html)
