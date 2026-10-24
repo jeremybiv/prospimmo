@@ -421,3 +421,7 @@
 .privacy{padding:100px 0}
 .privacy .agent-grid{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){.privacy .agent-grid{grid-template-columns:1fr}}
+
+/* ---------- P3 : repère « Agent IA » à côté de la marque ---------- */
+.brand-tag{font-family:'JetBrains Mono';font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--emerald);padding:3px 7px;border-radius:6px;white-space:nowrap}
+@media(max-width:640px){.brand-tag{display:none}}
